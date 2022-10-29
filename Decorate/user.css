@@ -1,0 +1,73 @@
+/* html {
+    height: 100%;
+  }
+
+.container {
+    background-color: #474747;
+    font-family: "Noto Sans JP";
+    width: 400px;
+    margin: 3rem auto;
+    padding: 1.75rem 2.75rem;
+    border-radius: 12px;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 6px -1px #343434;
+    font-family: 'Titillium Web', sans-serif;
+}
+ */
+ .wrap-calendar-lev-1{
+  width: 1000px;
+  /* margin: 10rem auto; */
+}
+/* ส่วนของเดือนและปี */
+.wrap-month-year{
+  display: flex;
+  justify-content: center;    
+  background-color: #bb5105;
+  color: #FFFFFF;    
+}
+/* ส่วนที่คุลมวันที่ และชื่อวัน */
+.wrap-day-list,
+.wrap-dayname-list{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: #EAEAEA;
+  align-content: flex-start;
+  box-shadow: 0 0.25em 0.25em rgba(0, 0, 0, 0.1);
+}
+/* ส่วนของรายการวันที่ และวัน */
+.wrap-day-list li,
+.wrap-dayname-list li{
+  width: calc(100% / 7);
+  /* background-color: yellow; */
+  height: 25px;
+  display: flex;
+  align-items: center;    
+  margin-top: 1px;
+  justify-content: center;
+}
+/* ช่องรายชื่อวันในสัปดาห์ */
+.wrap-dayname-list li{
+  background-color: chocolate;  
+  color: #FFFFFF;
+}
+/* ช่องวันที่ปกติ */
+.wrap-day-list li{
+  background-color: yellow;
+}
+/* ช่องที่ไม่มีวันที่ */
+.wrap-day-list li.no-date{
+  background-color: transparent;
+}
+/* ส่วนของการกำหนดวันที่ปัจจุบัน */
+.wrap-day-list li.current{
+  color: yellow;
+  background-color: red;
+}
+
+h1 {
+  width: 1000px;
+  margin: 3rem auto;
+}

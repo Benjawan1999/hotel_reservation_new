@@ -1,0 +1,19 @@
+body {
+  background: #8d7070;  
+  background: -webkit-linear-gradient(to top, #b4b2b2, #a5a4a4);  
+  background: linear-gradient(to top, #FAF0E6, #FFB6C1); 
+  background-repeat: no-repeat;
+  min-height: 100%;
+}
+
+.container {
+    background-color: #ffffff;
+    font-family: "Noto Sans JP";
+    width: 400px;
+    margin: 3rem auto;
+    padding: 1.75rem 2.75rem;
+    border-radius: 12px;
+    box-sizing: border-box;
+    box-shadow: 1px 1px 6px -1px #ffffff;
+    font-family: 'Titillium Web', sans-serif;
+  }
