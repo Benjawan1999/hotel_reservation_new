@@ -5,10 +5,11 @@ require_once "../connect.php";
 if (isset($_GET['checkout'])) {
     $checkout_id = $_GET['checkout'];
     $room_id = $_GET['roomid'];
-    $checkoutstmt = $conn->query("UPDATE booking SET status = 3 WHERE id = $checkout_id");
+    $fine = $_GET['fine'];
+    $checkoutstmt = $conn->query("UPDATE booking SET status = 3,fine=$fine WHERE id = $checkout_id");
     $checkoutstmt->execute();
 
-    
+
     if ($checkoutstmt) {
         $roomstmt = $conn->query("UPDATE room SET status = 0 WHERE id = $room_id");
         $roomstmt->execute();
@@ -17,7 +18,6 @@ if (isset($_GET['checkout'])) {
         $_SESSION['success'] = "Data has been checkout succesfully";
         header("refresh:1; url=checkoutbooking.php");
     }
-    
 }
 
 
@@ -109,10 +109,10 @@ function checkstatus($status)
                             <td><?php echo $booking['check_in']; ?></td>
                             <td><?php echo $booking['check_out']; ?></td>
                             <td><?php echo $booking['packagename']; ?></td>
-                            <td><?php echo $booking['price']; ?></td>
+                            <td><?php echo $booking['price']; ?> ฿</td>
                             <td><?php echo checkstatus($booking['status']); ?></td>
                             <td>
-                                <a onclick="return confirm('Are you sure you want to check out?');" href="?checkout=<?php echo $booking['id']; ?>&roomid=<?php echo $booking['roomid'] ?>" class="btn btn-danger">Check Out</a>
+                                <button type="button" onclick="fineCheckout();" class="btn btn-danger">Check Out</button>
                             </td>
                         </tr>
 
@@ -129,6 +129,15 @@ function checkstatus($status)
         $(document).ready(function() {
             $('#example').DataTable();
         });
+
+        function fineCheckout() {
+            let money = prompt("How much is the fine", "0");
+            if (money != null) {
+                window.location.href = "?checkout=<?php echo $booking['id']; ?>&roomid=<?php echo $booking['roomid'] ?>&fine="+money;
+            } else {
+                window.location.href = "?checkout=<?php echo $booking['id']; ?>&roomid=<?php echo $booking['roomid'] ?>&fine=0";
+            }
+        }
     </script>
 </body>
 

@@ -99,12 +99,12 @@ function checkstatus($status)
                             <td><?php echo $booking['check_in']; ?></td>
                             <td><?php echo $booking['check_out']; ?></td>
                             <td><?php echo $booking['packagename']; ?></td>
-                            <td><?php echo $booking['price']; ?></td>
+                            <td><?php echo $booking['price']; ?> ฿</td>
                             <td><?php echo checkstatus($booking['status']); ?></td>
 
                             <td>
                                 <?php if ($booking['status'] == 0) { ?>
-                                    <a href="payment.php?id=<?php echo $booking['id']; ?>" class="btn btn-success">Payment</a>
+                                    <a href="payment.php?id=<?php echo $booking['id']; ?>&price=<?php echo $booking['price']; ?>" class="btn btn-success">Payment</a>
                                     <a onclick="return confirm('Are you sure you want to cancel?');" href="?delete=<?php echo $booking['id']; ?>" class="btn btn-danger">Cancel</a>
                                 <?php } ?>
                             </td>

@@ -142,7 +142,7 @@
                             <th scope="row"><?php echo $room['id']; ?></th>
                             <td width="250px"><img class="rounded" width="100%" src="/Manu/Images/<?php echo $room['img']; ?>" alt=""></td>
                             <td><?php echo $room['name']; ?></td>
-                            <td><?php echo $room['price']; ?></td>
+                            <td><?php echo $room['price']; ?> ฿</td>
                             <td><?php echo $room['detail']; ?></td>
                             <td>
                                 <a href="edit.php?id=<?php echo $room['id']; ?>" class="btn btn-warning">Edit</a>

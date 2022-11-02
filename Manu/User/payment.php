@@ -22,9 +22,9 @@
             </div>
         </div>
         <hr>
-        
+
         <form action="insert.php" method="post" enctype="multipart/form-data">
-        <input type="hidden" readonly value="<?php echo $_GET['id']; ?>" required class="form-control" name="id" >
+            <input type="hidden" readonly value="<?php echo $_GET['id']; ?>" required class="form-control" name="id">
             <div class="mb-3">
                 <label for="bank" class="form-label">Bank Name:</label>
                 <div class="form-check">
@@ -36,7 +36,7 @@
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="bank"  value="scb" id="flexRadioDefault2" checked>
+                    <input class="form-check-input" type="radio" name="bank" value="scb" id="flexRadioDefault2" checked>
                     <label class="form-check-label" for="flexRadioDefault2">
                         <div>ไทยพาณิชย์ สาขา ชุมพร</div>
                         <div>ชื่อบัญชี โรงแรม 5 ดาว</div>
@@ -46,7 +46,11 @@
             </div>
             <div class="mb-3">
                 <label for="amount" class="form-label">Amount:</label>
-                <input type="number" class="form-control" name="amount" required>
+                <div class="input-group">
+                    <input type="number" class="form-control" name="amount" required value="<?php echo $_GET['price'] ?>" readonly>
+                    <span class="input-group-text">฿</span>
+                </div>
+
             </div>
             <div class="mb-3">
                 <label for="img" class="col-form-label">Transfer Proof:</label>

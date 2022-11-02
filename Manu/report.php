@@ -1,19 +1,19 @@
-<?php 
-    require_once "../connect.php";
+<?php
+require_once "../connect.php";
 
-    if (isset($_GET['confirm'])) {
-        $confirm_id = $_GET['confirm'];
-        $confirmstmt = $conn->query("UPDATE booking
+if (isset($_GET['confirm'])) {
+    $confirm_id = $_GET['confirm'];
+    $confirmstmt = $conn->query("UPDATE booking
         SET status = 2
         WHERE id = $confirm_id;");
-        $confirmstmt->execute();
-    
-        if ($confirmstmt) {
-            echo "<script>alert('Data has been confirm successfully');</script>";
-            $_SESSION['success'] = "Data has been confirm succesfully";
-            header("refresh:1; url=report.php");
-        }
+    $confirmstmt->execute();
+
+    if ($confirmstmt) {
+        echo "<script>alert('Data has been confirm successfully');</script>";
+        $_SESSION['success'] = "Data has been confirm succesfully";
+        header("refresh:1; url=report.php");
     }
+}
 ?>
 
 <!DOCTYPE html>
@@ -39,13 +39,13 @@
             <hr>
 
             <?php if (isset($_SESSION['success'])) { ?>
-                    <div class="alert alert-success">
-                        <?php 
-                            echo $_SESSION['success'];
-                            unset($_SESSION['success']); 
-                        ?>
-                    </div>
-                <?php } ?>
+                <div class="alert alert-success">
+                    <?php
+                    echo $_SESSION['success'];
+                    unset($_SESSION['success']);
+                    ?>
+                </div>
+            <?php } ?>
 
             <table id="example" class="table table-striped" style="width:100%">
                 <thead>
@@ -65,7 +65,7 @@
                 <tbody>
                     <?php
                     $stmt = $conn->query("SELECT DISTINCT b.id,pm.pay_date,b.guests,rt.name,
-                    b.check_in, b.check_out,pk.name as pk,b.price,b.status 
+                    b.check_in, b.check_out,pk.name as pk,b.price,b.status,pm.pay_id
                     FROM booking b 
                     INNER JOIN payment pm 
                     ON b.id = pm.booking_id 
@@ -92,10 +92,11 @@
                                 <td><?php echo $report['check_in'] ?></td>
                                 <td><?php echo $report['check_out'] ?></td>
                                 <td><?php echo $report['pk'] ?></td>
-                                <td><?php echo $report['price'] ?></td>
+                                <td><?php echo $report['price'] ?> ฿</td>
                                 <td><?php echo $report['status'] ?></td>
 
                                 <td>
+                                    <a href="transfer_details.php?id=<?php echo $report['pay_id']; ?>" class="btn btn-outline-dark">details</a>
                                     <a onclick="return confirm('Are you sure you want to confirm?');" href="?confirm=<?php echo $report['id']; ?>" class="btn btn-info">Confirm</a>
                                 </td>
                             </tr>

@@ -105,7 +105,7 @@ require_once "../../connect.php";
                     <option data-pack="0" selected="selected" value="0">Select Package</option>
 
                     <?php
-                    $stmt = $conn->query("SELECT * FROM package WHERE status = 1 ");
+                    $stmt = $conn->query("SELECT * FROM package WHERE status = 1 AND stop > now()");
                     $stmt->execute();
                     $package = $stmt->fetchAll();
 
@@ -132,10 +132,13 @@ require_once "../../connect.php";
         </form>
     </div>
     <script>
-        const start = document.getElementById('start');
-        const stop = document.getElementById('stop');
-        const price = document.getElementById('price');
-        const pack = document.getElementById('pack');
+        let start = document.getElementById('start');
+        let stop = document.getElementById('stop');
+        let result = document.getElementById('price');
+        let price = <?php echo $roomdata['price'] ?>;
+        let pack = document.getElementById('pack');
+        let priceupdate = 0;
+        let price1 = 0;
 
         start.addEventListener('change', updateValue);
         stop.addEventListener('change', updateValue);
@@ -143,15 +146,15 @@ require_once "../../connect.php";
 
         function updatepackage(e){
             const datapack = e.target.options[event.target.selectedIndex].dataset.pack;
-            const priceupdate = price.value-datapack;
-            price.value = priceupdate;
+            priceupdate = datapack;
+            getresult();
         }
 
         function updateValue(e) {
             if (start.value != "" && stop.value != "") {
                 const number = dateDiff(start.value,stop.value);
-                const price1 = price.value * number;
-                price.value = price1;
+                price1 = number;
+                getresult();
             }
         }
 
@@ -163,6 +166,11 @@ require_once "../../connect.php";
             const diffTime = Math.abs(date2 - date1);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             return diffDays;
+        }
+
+        function getresult() {
+            console.log(price);
+            result.value = price * price1 - priceupdate;
         }
     </script>
 
