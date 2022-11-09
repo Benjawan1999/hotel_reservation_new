@@ -181,7 +181,7 @@ function checkstatus($status)
                             <td><?php echo $package['days']; ?></td>
                             <td><?php echo $package['start']; ?></td>
                             <td><?php echo $package['stop']; ?></td>
-                            <td><?php echo $package['price']; ?> ฿</td>
+                            <td><?php echo number_format($package['price']); ?> ฿</td>
                             <td><?php echo checkstatus($package['status']); ?></td>
                             <td>
                                 <a href="edit.php?id=<?php echo $package['id']; ?>" class="btn btn-warning">Edit</a>

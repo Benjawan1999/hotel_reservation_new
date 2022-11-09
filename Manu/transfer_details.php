@@ -41,7 +41,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Transfer Date: <?php echo $payment['pay_date']; ?></h5>
                         <h5 class="card-title">Bank: <?php echo $payment['bank']; ?></h5>
-                        <h5 class="card-title">Amount: <?php echo $payment['pay_total']; ?> THB</h5>
+                        <h5 class="card-title">Amount: <?php echo number_format($payment['pay_total']); ?> THB</h5>
                         <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
                         <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                     </div>

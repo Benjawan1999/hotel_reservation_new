@@ -90,7 +90,7 @@ function checkstatus($status)
                             <td><?php echo $booking['check_in']; ?></td>
                             <td><?php echo $booking['check_out']; ?></td>
                             <td><?php echo $booking['packagename']; ?></td>
-                            <td><?php echo $booking['price']; ?> ฿</td>
+                            <td><?php echo number_format($booking['price']); ?> ฿</td>
                             <td><?php echo checkstatus($booking['status']); ?></td>
 
                         </tr>

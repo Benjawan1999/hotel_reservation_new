@@ -102,7 +102,7 @@ if (isset($_POST['search'])) {
                             <th scope="row"><?php echo $data['id']; ?></th>
                             <td width="250px"><img class="rounded" width="100%" src="/Manu/Images/<?php echo $data['img']; ?>" alt=""></td>
                             <td><?php echo $data['roomtype_id']; ?></td>
-                            <td><?php echo $data['price']; ?> ฿</td>
+                            <td><?php echo number_format($data['price']); ?> ฿</td>
                             <td><?php echo $data['detail']; ?></td>
                             <td>
                                 <a href="addbooked.php?id=<?php echo $data['id']; ?>" class="btn btn-success">Book a Room</a>

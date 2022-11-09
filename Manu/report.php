@@ -9,8 +9,31 @@ if (isset($_GET['confirm'])) {
     $confirmstmt->execute();
 
     if ($confirmstmt) {
+        $pay = $_GET['pay_id'];
+        $paystmt = $conn->query("UPDATE payment SET status = 1 WHERE pay_id = $pay");
+        $paystmt->execute();
+
         echo "<script>alert('Data has been confirm successfully');</script>";
         $_SESSION['success'] = "Data has been confirm succesfully";
+        header("refresh:1; url=report.php");
+    }
+}
+
+if (isset($_GET['comment'])) {
+    $comment = $_GET['comment'];
+    $id = $_GET['id'];
+    $commentstmt = $conn->query("UPDATE booking SET status = 0,comment='$comment' WHERE id = $id");
+    $commentstmt->execute();
+
+
+    if ($commentstmt) {
+        $pay = $_GET['pay_id'];
+        $paystmt = $conn->query("UPDATE payment SET status = 1 WHERE pay_id = $pay");
+        $paystmt->execute();
+    
+
+        echo "<script>alert('Data has been checkout successfully');</script>";
+        $_SESSION['success'] = "Data has been checkout succesfully";
         header("refresh:1; url=report.php");
     }
 }
@@ -64,7 +87,7 @@ if (isset($_GET['confirm'])) {
                 </thead>
                 <tbody>
                     <?php
-                    $stmt = $conn->query("SELECT DISTINCT b.id,pm.pay_date,b.guests,rt.name,
+                    $stmt = $conn->query("SELECT b.id,pm.pay_date,b.guests,rt.name,
                     b.check_in, b.check_out,pk.name as pk,b.price,b.status,pm.pay_id
                     FROM booking b 
                     INNER JOIN payment pm 
@@ -75,7 +98,7 @@ if (isset($_GET['confirm'])) {
                     ON rt.id = r.roomtype_id
                     LEFT OUTER JOIN package pk
                     ON pk.id = b.package_id
-                    WHERE b.status = 1");
+                    WHERE b.status = 1 and pm.status = 0");
                     $stmt->execute();
                     $reports = $stmt->fetchAll();
 
@@ -86,18 +109,19 @@ if (isset($_GET['confirm'])) {
                     ?>
                             <tr>
                                 <th scope="row"><?php echo $report['id']; ?></th>
-                                <td><?php echo $report['pay_date'] ?></td>
-                                <td><?php echo $report['guests'] ?></td>
-                                <td><?php echo $report['name'] ?></td>
-                                <td><?php echo $report['check_in'] ?></td>
-                                <td><?php echo $report['check_out'] ?></td>
-                                <td><?php echo $report['pk'] ?></td>
-                                <td><?php echo $report['price'] ?> ฿</td>
-                                <td><?php echo $report['status'] ?></td>
+                                <td><?php echo $report['pay_date']; ?></td>
+                                <td><?php echo $report['guests']; ?></td>
+                                <td><?php echo $report['name']; ?></td>
+                                <td><?php echo $report['check_in']; ?></td>
+                                <td><?php echo $report['check_out']; ?></td>
+                                <td><?php echo $report['pk']; ?></td>
+                                <td><?php echo number_format($report['price'] )?> ฿</td>
+                                <td><?php echo $report['status']; ?></td>
 
                                 <td>
                                     <a href="transfer_details.php?id=<?php echo $report['pay_id']; ?>" class="btn btn-outline-dark">details</a>
-                                    <a onclick="return confirm('Are you sure you want to confirm?');" href="?confirm=<?php echo $report['id']; ?>" class="btn btn-info">Confirm</a>
+                                    <a onclick="return confirm('Are you sure you want to confirm?');" href="?confirm=<?php echo $report['id']; ?>&pay_id=<?php echo $report['pay_id'] ?>" class="btn btn-info">Confirm</a>
+                                    <button type="button" onclick="fineCheckout();" class="btn btn-danger">Cancel</button>
                                 </td>
                             </tr>
                     <?php }
@@ -107,6 +131,21 @@ if (isset($_GET['confirm'])) {
         </div>
         <hr>
     </div>
+
+    <script>
+      
+
+        function fineCheckout() {
+            let money = prompt("Please enter a comment");
+            if (money != null) {
+                window.location.href = "?id=<?php echo $report['id']; ?>&pay_id=<?php echo $report['pay_id'] ?>&comment="+money;
+            } else {
+                window.location.href = "?id=<?php echo $report['id']; ?>";
+            }
+            console.log(555);
+        }
+    </script>
+
 </body>
 
 </html>

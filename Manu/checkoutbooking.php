@@ -109,7 +109,7 @@ function checkstatus($status)
                             <td><?php echo $booking['check_in']; ?></td>
                             <td><?php echo $booking['check_out']; ?></td>
                             <td><?php echo $booking['packagename']; ?></td>
-                            <td><?php echo $booking['price']; ?> ฿</td>
+                            <td><?php echo number_format($booking['price']); ?> ฿</td>
                             <td><?php echo checkstatus($booking['status']); ?></td>
                             <td>
                                 <button type="button" onclick="fineCheckout();" class="btn btn-danger">Check Out</button>

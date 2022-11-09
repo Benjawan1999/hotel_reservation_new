@@ -67,6 +67,7 @@ function checkstatus($status)
                     <th scope="col">Package</th>
                     <th scope="col">Price</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Comment</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -99,8 +100,9 @@ function checkstatus($status)
                             <td><?php echo $booking['check_in']; ?></td>
                             <td><?php echo $booking['check_out']; ?></td>
                             <td><?php echo $booking['packagename']; ?></td>
-                            <td><?php echo $booking['price']; ?> ฿</td>
+                            <td><?php echo number_format($booking['price']); ?> ฿</td>
                             <td><?php echo checkstatus($booking['status']); ?></td>
+                            <td><?php echo $booking['comment']; ?></td>
 
                             <td>
                                 <?php if ($booking['status'] == 0) { ?>
